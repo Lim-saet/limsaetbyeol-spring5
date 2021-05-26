@@ -5,7 +5,13 @@ package kr.or.test;
  *
  */
 
-public class Step1 extends Object {
+public class Step1 {
+	  public void Step1() {
+		  // 클래스명과 같은이름의 메서드를 생성자매서드 자동으로 만들어집니다.
+		  //중요한이유는 다른 클래스에서 Step1을 객체로 만들때 Step1 aaa = new Step1();
+		  //자바앱에서는 객체를 생성자 메서드로 만들때 필수
+		  //단, 스프링에선 @Injext로 객체를 만들어서 사용
+	  }
      //멤버변수(전역변수)는 Step1클래스에 영향을 모두 주는 변수 
 	 //내부변수(내부변수)는 main메서드 내부에서만 영향을 주는 변수 
 //	 private String name; //멤버변수 사용예,step2클래스에서 사용예정
