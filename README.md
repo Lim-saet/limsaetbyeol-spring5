@@ -1,4 +1,17 @@
 #### 20210531 월 작업예정
+- 필드데이터형2: CLOB(CHAR LONG BYTE) 글 내용이 많을 때 사용하는 데이터 형태 
+- 필드 데이터형: VARCHAR2(2바이트를 1글자-한글), VARCHAR(1바이트 1글자-영문전용)
+- 테이블 구성: 필드(컬럼,열)=테이블의 세부 멤버변수(자바vo클래스의 멤버변수)
+- 필드구성: Primary(주키,기본키,고유키)=테이블영역에서 고유한 ID를 말함(중복되지 않는 값)
+- PK 예시(개인을 식별할 수 있는 값): 로그인ID, 개인이메일주소, 주민번호 등, 게시판 타입
+- RDBMS(Relation Data Base Management System): 관계형데이터베이스관리 시스템 
+- 오라클: 테이블스페이스(TableSpace) = 스키마(Schema:Mysql) = 데이터베이스(DB)-MS-SQL
+- 설치시 암호는 apmsetup으로 통일 
+- EntityRelationDiagram(ERD-객체관계그림) : Entity = 테이블
+- 데이터 모델: Model Object를 형상화 시킨것을 모델이라고 함 데이터베이스를 말함
+- MVC 스프링프로젝트에서 M이 Model이고, 스프링프로젝트 구성중에 DB를 가리킴
+- 참고로 V는 view고 jsp를 말함
+- 참고로 C는 Controller고 클래스를 말함
 - 4장 패키지와 예외처리 실습 
 - 스프링프로젝트 ERD 제작 후 게시판 UI 디자인 적용
 
