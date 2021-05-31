@@ -1,0 +1,89 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="84F5EB1F-5FCF-E9C9-A348-CCD5B5AD5A46" name="TBL_ATTACH">
+<createdBy>ehxhf</createdBy>
+<createdTime>2021-05-31 04:57:35 UTC</createdTime>
+<commentInRDBMS><![CDATA[첨부파일관리테이블]]></commentInRDBMS>
+<ownerDesignName>Spring5</ownerDesignName>
+<ordsAlias>table_8</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="SAVE_FILE_NAME" id="1E5888DA-276E-CDE5-8307-C087FF8316DD">
+<createdBy>ehxhf</createdBy>
+<createdTime>2021-05-31 04:59:49 UTC</createdTime>
+<commentInRDBMS><![CDATA[물리적으로 저장되는파일명(해시데이터)]]></commentInRDBMS>
+<ownerDesignName>Spring5</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="REAL_FILE_NAME" id="C76D89FD-139D-0593-73CE-97457978FFAD">
+<createdBy>ehxhf</createdBy>
+<createdTime>2021-05-31 05:01:20 UTC</createdTime>
+<commentInRDBMS><![CDATA[한글파일명UI에서보이게]]></commentInRDBMS>
+<ownerDesignName>Spring5</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="REG_DATE" id="DE7A31FD-F5BE-5DEB-9F93-466AB63339D5">
+<createdBy>ehxhf</createdBy>
+<createdTime>2021-05-31 05:04:24 UTC</createdTime>
+<commentInRDBMS><![CDATA[등록일자]]></commentInRDBMS>
+<ownerDesignName>Spring5</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="BNO" id="1CD3B374-7840-8F2E-1C5E-0808E7BE6F26">
+<createdBy>ehxhf</createdBy>
+<createdTime>2021-05-31 05:06:23 UTC</createdTime>
+<commentInRDBMS><![CDATA[부모테이블의고유키]]></commentInRDBMS>
+<ownerDesignName>Spring5</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>11</dataTypePrecision>
+<ownDataTypeParameters>,11,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="B164E96C-E823-1DD1-2175-9ED8AB276399" referredColumn="3A400910-797F-0AF6-E22D-F3C8DCB21E2A"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="4E45BC62-9609-52DE-C4B0-6342395E980E" name="TBL_ATTACH_PK">
+<createdBy>ehxhf</createdBy>
+<createdTime>2021-05-31 05:00:07 UTC</createdTime>
+<ownerDesignName>Spring5</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1E5888DA-276E-CDE5-8307-C087FF8316DD"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="E9270042-949C-FFC1-A332-E9EE419F777E" name="TBL_ATTACH_TBL_BOARD_FK">
+<createdBy>ehxhf</createdBy>
+<createdTime>2021-05-31 05:06:52 UTC</createdTime>
+<ownerDesignName>Spring5</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1CD3B374-7840-8F2E-1C5E-0808E7BE6F26"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
