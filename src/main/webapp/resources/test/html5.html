@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 실습</title>
+    <style>
+        table, tr, th, td {
+            border: 1px solid black;
+            font-size: 13px;}
+            /* style의 주석 Ctrl+/ 조합 */
+            /* 테이블태그의 테두리 이중선을 1개선으로 병합 */
+            table {
+                border-collapse: separate;
+            }
+    </style>
+     <style>
+        /* css: cascade style sheet  계층형 스타일 표*/
+        header, nav, section, article, aside, footer{
+                border:1px dotted black;}
+        header > h1, footer > h1 { text-align: center; }
+        nav { display: block; height: 60px; }
+        nav > ul > li {
+            float:left; margin-right:20px;
+        }
+        div#contents { vertical-align: middle; }
+        div.contents { 
+            /* 내부의 컨텐츠 기준되는 외부요소에 관계형 포지션 추가  */
+            position: relative;
+            overflow: hidden;
+        }
+        section{ 
+            width: 79%; display: inline-block;
+            }
+        section > article { 
+            margin: 10px 30px;
+            border:1px solid skyblue; 
+            }
+        aside { 
+            width: 20%; display: inline-block;
+            height: 100%;
+            right:0px;
+            position:absolute;
+            }
+    </style>
+</head>
+<body>
+    <!-- HTML5 레이아웃 구조에 사용된 태그 
+    header, nav, section, article, aside, footer
+    -->
+    <header>
+        <h1>Header</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">menu1</a> </li>
+            <li><a href="#">menu2</a> </li>
+            <li><a href="#">menu3</a> </li>
+        </ul>
+    </nav>
+    <div class="contents">
+        <section>
+            <h1>section</h1>
+            <article>
+                <h2>article</h2>
+            </article>
+            <article>
+                <h2>article2</h2>
+            </article>
+        </section>
+        <aside>
+            <h2>aside</h2>
+        </aside>
+    </div>
+    <footer>
+        <h2>footer</h2>
+    </footer>
+    <!-- 테이블 태그(내용) 제어: 셀병합 
+    table, tr(table row줄), td(table data 칸)-->
+    <table>
+        <tr>
+            <th>순번</th>
+            <th>책이름</th>
+            <th>가격</th>
+            <th>판매량</th>
+            <th>판매액</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>HTML</td>
+            <td>7,000</td>
+            <td rowspan="2">1,000</td>
+            <!-- rowspan 세로칸을 병합 -->
+            <td>7,000,000</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>JS</td>
+            <td>7,000</td>
+            <!-- <td>1,000</td> -->
+            <td>7,000,000</td>
+        </tr> 
+             <td colspan="4">합계</td>
+             <!-- colspan 가로칸 병합 -->
+             <td>14,000,000</td>
+    </table>
+    <!-- 폼 태그 사용  엘리먼트: form 태그, input 태그-->
+    <!-- 액션-데이터자료전송(메서드:방법), radio(file), submit -->
+    <form action="http://naver.com" method="GET">
+        <input type="text" name="" id=""> 
+        <input type="password" name="password" id="">
+        <input type="date" name="date" id="">
+        <input type="color" name="color" id="">
+        <input type="radio" name="radio" id="">
+        <input type="radio" name="radio" id="">
+        <!-- 라디오 버튼은 2개 이상중 1개만 선택, name이 같음 -->
+        <input type="checkbox" name="checkbox" id="">
+        <input type="checkbox" name="checkbox" id="">
+        <!-- 체크박스는 2개 이상중에 2개이상 선택가능,name이 틀림 -->
+        <input type="file" name="file" id="">
+        <input type="file" name="file" id="">
+        <textarea name="textarea" id="" cols="30" rows="10"></textarea>
+        <input type="button" value="버튼">
+        <input type="submit" value="서밋">
+        <input type="submit" value="서밋">
+    </form>
+    <!-- 유투브 영상 집어넣기 iframe -->
+    <iframe width=100% height="300"src="http://www.human.or.kr/" frameborder="0"></iframe>
+    <iframe width="100%" height="300" src="https://www.youtube.com/embed/DQSrC_b7cq8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <!-- 컨텐츠 경로... .은 현재폴더의 상대경로, 절대경로-->
+    src="test/img/acacia-5183309_640.jpg" 절대경로
+    src="./img/acacia-5183309_640.jpg" 상대경로
+    <!-- img src="img/ acacia-5183309_640-" alt="액박일떄 표시할 내용이 여기에" -->
+    <img style="width: 100%" src="/test/img/acacia-5183309_640.jpg" alt="엑박일떄 표시할 내용이 여기에"></style>
+    <!-- 영역지정 div : division, 가상링크는 #으로 만듦  -->
+    <div style="background-color: rgb(119, 204, 156);">
+        <a href="#">네이버</a>
+        <a href="#">다음</a>    
+    </div>
+    <!-- 리스트형 2가지: ol(Ordered List 정렬된 리스트),ul(Unordered List 비정렬 리스트) -->
+    <ol type="I">
+        <li>헬로 html</li>
+        <li>헬로 html</li>
+        <li>헬로 html</li>
+    </ol>
+    <ul>
+        헬로 html
+        헬로 html
+        헬로 html
+    </ul>
+    <!-- H20, X2 같은 특수자를 아래첨자,위첨자로 보이도록 -->
+    <p>H<sub>2</sub>0</p>
+    <P>X<sup>2</sup>=4</P>
+    <!-- 로렘 입숨(립숨)은 작업한 공간에 채울내용을 자동으로 생성해주는 기능 -->
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laudantium ipsum voluptates quis molestiae, dolorem voluptas repellendus eaque dolores accusamus ratione, porro, ea aspernatur iure aliquid maiores harum sapiente quae veritatis. Illum, sapiente harum magni quasi maiores aperiam ipsa a fugit, accusantium esse quas dolore labore itaque obcaecati temporibus quibusdam dolorem cupiditate, dolorum est cumque! Excepturi cumque at illum nemo ratione nam voluptatibus nisi eaque provident soluta deleniti corporis, numquam quidem commodi animi aspernatur amet nulla fugit reprehenderit laborum, alias assumenda dolores exercitationem dolorum. Vitae dicta quibusdam, in nesciunt aliquam provident est non sint alias fuga laborum accusamus iste ex culpa!</p>
+    <table class="table table-bordered">
+<thead>
+	<tr>
+		<th>번호</th>
+		<th>제목</th>
+		<th>작성자</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>1</td>
+		<td>모든 국민은 법률이 정하는 바에 의하여 공...</td>
+		<td>단군</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>헌법재판소는 법관의 자격을 가진 9인의 재...</td>
+		<td>이황</td>
+	</tr>
+	<tr>
+		<td>3</td>
+		<td>공공필요에 의한 재산권의 수용·사용 또는...</td>
+		<td>홍익한</td>
+	</tr>
+	<tr>
+		<td>4</td>
+		<td>중앙선거관리위원회는 법령의 범위안에서 ...</td>
+		<td>임춘</td>
+	</tr>
+	<tr>
+		<td>5</td>
+		<td>모든 국민은 근로의 권리를 가진다. 국가는...</td>
+		<td>의자왕</td>
+	</tr>
+</tbody>
+</table>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium eligendi vero corrupti quis est tenetur voluptatibus, quod, neque quidem temporibus ipsa impedit debitis minima libero eos omnis. Natus, voluptatem necessitatibus.</p>
+    <!-- html:5콜론, ;세미콜론 -->
+    <!-- h헤더태그 약자 글 제목에 표시 -->
+    <!-- p태그는 문단의 약자(paragraph) -->
+    <!-- 줄바꿈이 이루어지는 영역태그를 블럭영역 -->
+    <!-- 줄바꿈이 이루어지지 않는 영역 span은 인라인블럭 =span -->
+    <!-- 도메인(사람이 확인) == ip주소(컴퓨터 시스템) -->
+    <!-- 매칭(묶어줌) = 바인딩(묶어줌) -->
+    <!-- (사람이 알아들을 수 있는)색상(color) : red, blue, skyblue, black etc.-->
+    <!-- (컴퓨터가 알아들을 수 잇는)색상(color) : #ff(red)00(green)00(blue): #16진수 
+         16진수: 0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f,g=총 16개 / 빛의 3가지 색상(3원색) 빛은 더하면 흰색으로 
+        참고로 물감은 더하면 검은색으로 변함
+        예: 흰색:#ffffff = #fff = white = 함수 rgb()-->
+         <!--  -->
+    <span style="color: rgb(255,150,250);">헬로 html</span>
+    <span>헬로 html</span>
+    <hr>
+    <br><br>
+    <p>헬로 html1</p>
+    <p>헬로 html2</p>
+    <h3>헬로 html</h3>
+    <h4>헬로 html</h4>
+    <h5>헬로 html</h5>
+    <h6>헬로 html</h6>
+</body>
+</html>
