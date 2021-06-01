@@ -2,6 +2,12 @@
 -
 
 
+#### 20210602(수) 작업예정
+- views/home/index.jsp 엑박처리 후 분해(header.jsp, footer.jsp, index.jsp)
+- admin 폴더 만든이후 분해 처리예정
+- admin 부터 프로그램 작업 시작
+- 4장패키지와 예외처리실습
+
 #### 20210601 화 작업
 - 에러 404(file not found 경로 이상일때), 500(자바프로그램에러)
 - 프로젝트 버전 올리기 -> 외부라이브러리 부분의 버전을 올림 - 메이븐 컴파일러 -> pom.xml 버전을 관리  메이븐은 수정 및 추가-> maven 메뉴에서 maven update
