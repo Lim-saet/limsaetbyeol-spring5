@@ -3,7 +3,9 @@ package com.edu.test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.inject.Inject;
 import javax.sql.DataSource;
@@ -39,24 +41,42 @@ public class DataSourceTest {
     	//스프링빈을 사용하지 않을때 예전 방식: 코딩테스트에서는 스프링설정을 안쓰고, 직접 DB 아이디/암호 입력
     	Connection connection = null;
     	connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/XE","XE","apmsetup");
-    	logger.debug("데이터베이스 접속이 성공하였습니다. DB종류는" + 
-        connection.getMetaData().getDatabaseProductName());
-    	
+    	logger.debug("데이터베이스 직접 접속이 성공하였습니다. DB종류는" + connection.getMetaData().getDatabaseProductName());
+    	//직접쿼리를 날립니다 날리기전 쿼리문자 객체성공statement
+    	Statement stmt = connection.createStatement();
+    	//위 쿼리문장객체를 만드는 이유? 보안(SQL인젝션공격)
+    	//stmt객체가 없으면, 개발자가 SQL인젝션 방지코딩을 넣어야 합니다
+    	//insert쿼리 문장만듦(아래)
+    	//예전 방식으로 더미데이터(샘플데이터)를 100개 입력합니다
+		/*
+		 * for(int cnt=0;cnt<100;cnt++) {//error deptno 자리수가 두자리로 고정이 되어서 100은 입력시 에러
+		 * stmt.executeQuery("insert into dept02 values("+cnt+",'디자인부','경기도')"); }
+		 */
+    	//인서트,업데이트,삭제시 sql 디벨로퍼에서는 커밋이 필수지만, 외부 java클래스 인서트할때는 자동커밋이 됩니다
+    	//테이블에 입력되어 있는 레코드셋을 select 쿼리 stmt문장으로 가져옴 
+    	ResultSet rs = stmt.executeQuery("select * from dept order by deptno");//20년전 작업방식
+    	//위에서 저장된 rs객체를 반복문으로 출력(아래)
+    	while(rs.next()) {
+    		//rs객체의 레코드가 없을때까지 반복
+    		logger.debug(rs.getString("deptno")+" "+rs.getString("dname")+
+    				" "+rs.getString("loc"));
+    	}
+    	stmt = null;//메모리 반환
+    	rs = null;//메모리 반환
     	connection = null;//메모리 초기화 
     }
-    @Test
-    public void dbConnectionTest() {
-    	//데이터베이스 커넥션 테스트: 설정은 root-context의 빈(스프링클래스)을 이용
-    	try {
+	@Test
+	public void dbConnectionTest() {
+		//데이터베이스 커넥션 테스트: 설정은 root-context의 빈(스프링클래스)를 이용
+		try {
 			Connection connection = dataSource.getConnection();
-			logger.debug("데이터베이스 접속이 성공하였습니다. DB종류는" + 
-			connection.getMetaData().getDatabaseProductName());
+			logger.debug("데이터베이스 접속이 성공 하였습니다. DB종류는 "+ connection.getMetaData().getDatabaseProductName());
 		} catch (SQLException e) {
-			logger.debug("데이터베이스 접속이 실패하였습니다.");
+			logger.debug("데이터베이스 접속이 실패 하였습니다.");
 			//e.printStackTrace();
 		}
-    	
-    }
+		
+	}
     @Test
     public void jnitTest() {
     	//로거는 장점 조건에 따라서 출력을 조정할수있음
