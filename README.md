@@ -1,10 +1,51 @@
 ####작업예정
 -스프링프로젝트 순서
-1.Junit > 마이바티스(DB핸들링)> AOP(다중게시판기능)> 페이징기능 > 검색기능 > 트랜잭션(게시판)> 첨부파일(파일업로드다운로드)기능 > 스프링시큐리티(로그인인증/권한체크) > 댓글처리(RestAPI생성)
+1.Junit > 마이바티스(DB핸들링)> AOP(다중게시판기능)> 페이징기능** > 검색기능 > 트랜잭션(게시판)> 첨부파일(파일업로드다운로드)기능 배열** > 스프링시큐리티(로그인인증/권한체크)** > 댓글처리(RestAPI생성)
 2.>댓글처리(RestApi-백엔드,Ajax처리-프론트단) >네이버아이디로그인(외부API사용) > 해로쿠클라우드배포
 3. 문서작업(화면기획서XLS 제작, 화면설계서PPT 제작)
 
-#### 20210607(월) 작업예정
+####20210608 화 작업예정
+- 페이징에 사용되는 변수(쿼리변수+VO변수) 아래
+- queryStartNo, queryPerPageNum, page, perPageNum, startPage, endPage
+- 검색에 사용되는 변수(쿼리변수만): 검색어(search_keyword), 검색조건(search_type)
+
+```
+--SQL쿼리 페이징을 구현해서 변수로 삼을것을 정의
+--PageVO의 멤버변수로 사용예정
+SELECT TableB.* FROM
+(
+    SELECT ROWNUM AS RNUM, TableA.* FROM
+    (
+        SELECT * FROM tbl_member
+        WHERE user_id LIKE '%admin%'
+        OR user_name LIKE '%사용자%'
+        ORDER BY reg_date DESC
+    ) TableA WHERE ROWNUM <= (1*5)+5 -- (page*b)+b
+) TableB WHERE TableB.RNUM > 1*5     -- (page*b)
+--쿼리에서 필요한 변수는 2개 
+--현재 페이지 수의 변수  page*b == queryStartNo
+--한 페이지당 보여줄 개수의 변수 b == queryPerPageNum
+--PageVO에서 필요한 추가변수: page
+--UI하단의 페이지 선택번호 출력할때 사용하는 변수(아래)
+--perPagenum 변수를 받아서 StartPage,endPage 를 구해서 하단의 페이지 선택번호를 출력
+```
+
+- 링코딩 작업순서 1부터6까지(아래)
+- 1. ERD를 기준으로 VO클래스를 생성.
+- M-V-C 사이에 데이터를 입출력하는 임시저장 공간(VO클래스-멤버변수+Get/Set메서드) 생성
+- 보통 ValueObject클래스는 DB테이블과 1:1로 매칭이 됩니다.*오늘 MemberVO만듬
+- 2.매퍼쿼리(마이바티스사용)를 만듭니다.(VO사용해서쿼리생성)-내일만들예정
+- 3.DAO(데이터엑세스오브젝트)클래스를 생성(SqlSession사용쿼리실행).*오늘 Sql세션은 root-context에 빈으로 만들었습니다.(1개 ) 
+- IF 인터페이스 만드는 목적: 복잡한구현클래스 간단하게 구조화 시켜서 개발자가 관리하기 편하게 정리하는 역할
+-> 기사시험책 캡슐화 구현과 관련 (알약 캡슐 - 안에 어떤약이 있는지 모르게 먹게하기) 프로그램에서도 캡슐화는 구현 내용을 몰라도, 이름만 보고 사용하게 만든것
+- 스프링 부트(간단한 프로젝트)에서는 4번 Service 클래스가 없이 바로 컨트롤러로 이동합니다
+- 4.Service(서비스)클래스생성(서비스에 쿼리결과를 담아 놓습니다.)(1개)
+- 게시물을 등록하는 서비스 1개(tbl_board-DAO1+tbl_attach 첨부-DAO2)
+- Junit에서 위 작업한 내용을 CRUD테스트(선배작업) -> 대리,사원에게 아래 작업을 맡김 
+- 5.Controller(컨트롤러)클래스생성(서비스결과를 JSP로 보냅니다.)
+- 6.JSP(View파일) 생성(컨트롤러의Model객체를 JSTL을 이용해 화면에 뿌려 줍니다.)
+
+#### 20210607(월) 작업
 - 마이바티스 추가 순서: 1번+2번 끝
 - 1. pom.xml에 의존성추가
 - 2. 마이바티스설정파일 추가(쿼리를 저장할 위치지정,파일명 지정) ok
@@ -23,6 +64,7 @@
 - 지금은 스프링으로 옮기지 못한 프로그램만 제외하고는 대부분 마이바티스로 쿼리를 관리
 - 그래서 마이바티스 셋팅을 함
 - 오라클의 DB관리 로그인정보(Application Express): admin / apmsetup-> 암호변경요청: Apmsetup1234%(대문자와 숫자와 특수문자추가)
+
 ```
 --SQL디벨러퍼에서 system으로 로그인후 아래 쿼리로 XE2사용을 완벽하게 지우기(아래)
 SELECT * FROM all_users;
@@ -34,6 +76,7 @@ delete from all_users where username='XE2';
 DROP USER XE2 CASCADE;--XE2사용자를 지울때,XE사용자의 테이블까지 모두 지우는 명령
 --CSS(Cascade계층형 Style Sheet)
 ```
+
 - 현업에서는 오픈소스인 mysql(마리아DB)을 사용할 기회가 더 많음-개발자가 더 많음
 - 오라클은 납품시 SW비용시 산정되어서 사용할 기회가 적지만 개발자가 상대적으로 적음 
 - 보통은 학교전산실, 시청전살실 기업체 전산실에 부탁을 해서 XE 사용자를 추가해 달라고 요청해서, 발급받은계정으로 개발을 시작

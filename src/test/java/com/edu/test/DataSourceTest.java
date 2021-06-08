@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.sql.DataSource;
@@ -16,6 +17,9 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+
+import com.edu.service.IF_MemberService;
+import com.edu.vo.MemberVO;
 
 /**
  * 이 클래스는 오라클과 연동해서 CRUD를 테스트하는 클래스 입니다
@@ -35,6 +39,8 @@ public class DataSourceTest {
     @Inject // 인젝트는 스프링에서 객체를 만드는 방법, 이전 자바에서는 new 키워드로 객체를 만들었고.. 
     DataSource dataSource;//Inject로 객체를 만들면  메모리 관리를 스프링이 대신 해줌
     //Inject 자바8부터 지원, 그럼, 이전 자바7에서 @Autowired로 객체를 만들었음
+    @Inject //MemberService 서비스를 주입받아서 객체를 사용합니다(아래)
+    private IF_MemberService memberService;
     
     //스프링 코딩 시작
     //M-V-C 사이에 데이터를 입출력하는 임시저장 공간(VO클래스-멤버변수_Get/Set메서드) 생성
@@ -42,16 +48,22 @@ public class DataSourceTest {
     //그래서 1. MemberVO.java VO클래스를 생성 (필수)
     // 2. DB(마이바티스쿼리)를 만듭니다 (VO사용됨) -내일부터 시작
     @Test
-    public void selextMember() throws Exception {
+    public void selectMember() throws Exception {
     	//회원관리 테이블에서 더미로 입력한 100개의 레코드를 출력 메서드 테스트 ->회원관리목록이 출력
-    	
+    	//현재 100명 검색기능, 페이징기능 여기서 구현 1페이지에 10명씩 나오게 변경
+    	//현재 몇페이지, 검색어 임시저장 공간 -> DB에 페이징조건, 검색조건문
+    	//변수를 2~3대 이상은 바로 String변수로 처리하지 않고, VO만들어 사용
+    	//PageVO.java 클래스를 만들어서 페이징처리변수와 검색어변수 선언, Get/set 생성
+    	//PagrVO 만들기 전 SQL쿼리로 가상으로 페이징을 한번 구현해 보면서 필요한 변수를 만들어야 함 
+    	List<MemberVO> listMember = memberService.selectMember();
+    	listMember.toString();
     }
     
     @Test
     public void oldQueryTest() throws Exception {
     	//스프링빈을 사용하지 않을때 예전 방식: 코딩테스트에서는 스프링설정을 안쓰고, 직접 DB 아이디/암호 입력
     	Connection connection = null;
-    	connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/XE","XE2","apmsetup");
+    	connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/XE","XE","apmsetup");
     	logger.debug("데이터베이스 직접 접속이 성공하였습니다. DB종류는" + connection.getMetaData().getDatabaseProductName());
     	//직접쿼리를 날립니다 날리기전 쿼리문자 객체성공statement
     	Statement stmt = connection.createStatement();
