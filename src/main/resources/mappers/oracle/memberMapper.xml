@@ -5,21 +5,38 @@
 이 매퍼는 회원관리 CRUD (입력,조회,수정,삭제)를 처리하는 쿼리를 모아놓은 파일 
 이번주는 조회기능 중 검색,페이징처리기능을 실습하는 것이 핵심-->
 <mapper namespace="memberMapper">
+<!-- 공통쿼리 마이바티스 include문 사용 -->
+<sql id="sqlWhere">
+ <if test="search_type != '' and search_type != null">
+        WHERE 
+        	<if test="search_type == 'all'.toString()">
+		        user_id LIKE '%'||#{search_keyword}||'%'
+		        OR user_name LIKE '%'||#{search_keyword}||'%'
+	        </if>
+	        <if test="search_type == 'user_id'.toString()">
+	        	user_id LIKE '%'||#{search_keyword}||'%'
+	        </if>
+	        <if test="search_type == 'user_name'.toString()">
+	        	user_name LIKE '%'||#{search_keyword}||'%'
+	        </if>
+        </if>
+</sql>
 <select id="countMember" resultType="int">
 select count(*) from tbl_member
 </select>
 <!-- pageVO 받아서 처리하는 조회 쿼리 -->
 <select id="selectMember" resultType="com.edu.vo.MemberVO">
-<![CDATA[
+
 SELECT TableB.* FROM
 (
     SELECT ROWNUM AS RNUM, TableA.* FROM
     (
         SELECT * FROM tbl_member
-        WHERE user_id LIKE '%'|| #{search_keyword} ||'%'
-        OR user_name LIKE '%'|| #{search_keyword} ||'%' 
+        <include refid="sqlWhere" />
         ORDER BY reg_date DESC
-    ) TableA WHERE ROWNUM <= (#{queryStartNo}*#{queryPerPageNum})+#{queryPerPageNum}
+    ) TableA 
+<![CDATA[
+   WHERE ROWNUM <= (#{queryStartNo}*#{queryPerPageNum})+#{queryPerPageNum}
 ) TableB WHERE TableB.RNUM > #{queryStartNo}*#{queryPerPageNum}
 ]]>
 </select>

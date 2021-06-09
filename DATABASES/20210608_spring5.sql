@@ -8,8 +8,8 @@ SELECT TableB.* FROM
         WHERE user_id LIKE '%admin%'
         OR user_name LIKE '%사용자%'
         ORDER BY reg_date DESC
-    ) TableA WHERE ROWNUM <= (0*5)+5
-) TableB WHERE TableB.RNUM > 0*5
+    ) TableA WHERE ROWNUM <= (2*5)+5 -- 0부터 선택한 페이지까지 전부 출력 
+) TableB WHERE TableB.RNUM > 2*5-- 한페이지당 보여줄 개수만 출력하는 역할
 --쿼리에서 필요한 변수는 2개 
 --현재 페이지 수의 변수  page*b == queryStartNo
 --한 페이지당 보여줄 개수의 변수 b == queryPerPageNum
