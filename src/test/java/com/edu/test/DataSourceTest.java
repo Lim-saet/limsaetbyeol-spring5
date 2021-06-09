@@ -43,6 +43,25 @@ public class DataSourceTest {
     @Inject //MemberService 서비스를 주입받아서 객체를 사용합니다(아래)
     private IF_MemberService memberService;
     
+    @Test
+    public void deleteMember() throws Exception {
+    	memberService.deleteMember("user_del");
+    	selectMember();
+    }
+    @Test
+    public void insertMember() throws Exception {
+    	MemberVO memberVO = new MemberVO();
+    	//insert쿼리에 저장할 객체
+    	memberVO.setUser_id("user_del");
+    	memberVO.setUser_pw("1234");//스프링시큐리티5버전으로 암호화 처리예정
+    	memberVO.setEmail("user@test.com");
+    	memberVO.setPoint(10);
+    	memberVO.setEnabled(true);
+    	memberVO.setLevels("ROLE_USER");
+    	memberVO.setUser_name("삭제할 사용자");
+    	memberService.insertMember(memberVO);
+    	selectMember();
+    }
     //스프링 코딩 시작
     //M-V-C 사이에 데이터를 입출력하는 임시저장 공간(VO클래스-멤버변수_Get/Set메서드) 생성
     //보통 ValueObject클래스는 DB테이블과 1:1로 매칭이 됩니다 
@@ -64,7 +83,7 @@ public class DataSourceTest {
         pageVO.setQueryPerPageNum(10);//쿼리사용 페이지당 개수 (필수값)
         pageVO.setTotalCount(memberService.countMember());//테스트하려고, 100명 입력
         pageVO.setSearch_type("user_id");//검색타입 all, user_id, user_name
-        pageVO.setSearch_keyword("admin");//검색어
+        pageVO.setSearch_keyword("user_del");//검색어
         //위 setTotalCount 위치가 다른 설정보다 상단이면, 에러발생->calcPage()가 실행할때 위 3가지 변수값이 저장되 있어야지 계산메서드가 정상작동되기때문 
         //위 토탈카운트변수값은 startPage, endPage계산에 필수입니다.
         //매퍼쿼리_DAO클래스_Service클래스_JUnit(나중에 컨트롤러에서 작업) 이제 역순으로 작업진행 

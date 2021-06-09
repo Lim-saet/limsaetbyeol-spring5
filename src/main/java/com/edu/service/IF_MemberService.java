@@ -15,4 +15,6 @@ public interface IF_MemberService {
     public List<MemberVO> selectMember(PageVO pageVO) throws Exception;
     //이 곳에 CRUD 메서드가 계속 추가됩니다
     public int countMember() throws Exception;
+	public void insertMember(MemberVO memberVO) throws Exception;
+	public void deleteMember(String user_id) throws Exception; 
 }
