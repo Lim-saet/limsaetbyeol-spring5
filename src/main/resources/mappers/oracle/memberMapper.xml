@@ -5,8 +5,12 @@
 이 매퍼는 회원관리 CRUD (입력,조회,수정,삭제)를 처리하는 쿼리를 모아놓은 파일 
 이번주는 조회기능 중 검색,페이징처리기능을 실습하는 것이 핵심-->
 <mapper namespace="memberMapper">
-<!-- 무조건 조회 쿼리 -->
+<select id="countMember" resultType="int">
+select count(*) from tbl_member
+</select>
+<!-- pageVO 받아서 처리하는 조회 쿼리 -->
 <select id="selectMember" resultType="com.edu.vo.MemberVO">
-select * from tbl_member
+select * from tbl_member 
+where user_id = #{search_keyword}
 </select>
 </mapper>

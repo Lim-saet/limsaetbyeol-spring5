@@ -4,6 +4,9 @@
 2.>댓글처리(RestApi-백엔드,Ajax처리-프론트단) >네이버아이디로그인(외부API사용) > 해로쿠클라우드배포
 3. 문서작업(화면기획서XLS 제작, 화면설계서PPT 제작)
 
+####20210609 수 작업예정
+
+
 ####20210608 화 작업예정
 - 페이징에 사용되는 변수(쿼리변수+VO변수) 아래
 - queryStartNo, queryPerPageNum, page, perPageNum, startPage, endPage
