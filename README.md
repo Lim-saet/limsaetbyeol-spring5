@@ -3,6 +3,37 @@
 1.Junit > 마이바티스(DB핸들링)> AOP(다중게시판기능)> 페이징기능** > 검색기능 > 트랜잭션(게시판)> 첨부파일(파일업로드다운로드)기능 배열** > 스프링시큐리티(로그인인증/권한체크)** > 댓글처리(RestAPI생성)
 2.>댓글처리(RestApi-백엔드,Ajax처리-프론트단) >네이버아이디로그인(외부API사용) > 해로쿠클라우드배포
 3. 문서작업(화면기획서XLS 제작, 화면설계서PPT 제작)
+- 헤로쿠 클라우드에 배포할때 매퍼폴더의 mysql폴더내의 쿼리에 now()를 date_add(now(3),interval 9 HOUR)변경예정
+
+####20210610 목작업예정
+- 컨트롤러를 이용해서 관리자단 회원관리화면 JSP 만들기 진행시작
+- JUnit 마치고, 관리자단 회원관리(CRUD) jsp까지는 작업함 이후 앞에 내용참조해서 확장해 나가는 작업이 이어짐
+- 수업전 내용 확인 합니다.(아래)
+- 쿼리실습에서 .equals함수 사용에 대해서 설명할때,아래 isEmpty메서드와 착각해서 이야기 한 내용이 있어서 정정 합니다.
+- 자바에서 객체가 공백 또는 비었는지 비교할때, 예를 들면, 우리프로젝트에서 첨부파일이 있는지 비교할때 아래 처럼 사용하지 않고
+- if(save_file_name != null && "".equals(save_file_name))
+- 다음처럼 짧게(널과공백체크를 한번에) 사용합니다.(아래)
+- if(!save_file_name.isEmpty())
+=========================================
+- GTM시간(그리니치천문대기준-표준시) - KST 한국시간과는 9시간
+- DB서버에 타임좀 설정 Asia/Seoul 되어있으면 그냥 사용
+- 만약 위 GTM + 9시간해서 Insert, Update 한국시간으로 사용
+- 오라클일때 확인 :
+SELECT TO_CHAR(systimestamp + numtodsinterval( 9, 'HOUR' ), 'YYYY-MM-DD HH24:MI.SS.FF4')  from dual;
+- Mysql(마리아dB)확인 :
+SELECT DATE_ADD(NOW(3), INTERVAL 9 HOUR);
+- ------------------------------------
+- 업데이트 실습은 회원암호를 스프링시큐리티5 암호화(1234->해시데이터)로 일괄변경 실습예정.
+- 정방향 암호화 가능, 역방향 복호화는 불가능(JAVA용 스프링시큐리티암호화,DB용 MD5등)
+
+```
+BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+String userPwEncoder = passwordEncoder.encode(memberVO.getUser_pw());
+memberVO.setUser_pw(userPwEncoder);
+```
+
+
+
 
 ####20210609 수 작업예정
 - 프로젝트를 진행: 보유기술 70%(솔루션있는업체) + 신기술 30%(개발사도 모름) - 9할 성공
@@ -11,7 +42,7 @@
 - <![CDATA[쿼리]]> : 태그안쪽에 부등호를 사용하기 위해서 문자열 변환 태그를 사용 
 - 쿼리에서 변수와 문자열과의 연결할때는 +(자바)x, ,(x), ||(ㅇ)
 - JUnit에서 회원관리 나머지 CRUD 테스트 진행 암호화도 실습예정
-- 컨트롤러를 이용해서 관리자단 회원관리 화면 JSP 만들기 진행예정
+
 
 ####20210608 화 작업예정
 - 페이징에 사용되는 변수(쿼리변수+VO변수) 아래
