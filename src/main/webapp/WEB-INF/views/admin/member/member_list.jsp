@@ -76,8 +76,7 @@
                 <!-- jstl 반복문으로 listMember객체 바인딩-->
                 <c:forEach var="memberVO" items="${listMember}" >
                 
-                <tr style="cursor: pointer;" onclick="location.replace('/admin/member/member_view?search_type=${pageVO.search_type}&search_keyword=${pageVO.search_keyword}&
-user_id=${memberVO.user_id}');">
+                <tr style="cursor: pointer;" onclick="location.replace('/admin/member/member_view?page=${pageVO.page}&search_type=${pageVO.search_type}&search_keyword=${pageVO.search_keyword}&user_id=${memberVO.user_id}');">
 
                   <td><c:out value="${memberVO.user_id}" /></td>
                   <td><c:out value="${memberVO.user_name}" /></td>
