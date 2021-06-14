@@ -32,6 +32,18 @@ public class AdminController {
 	@Inject
 	private IF_MemberService memberService;
 	
+	//아래경로는 수정처리를 호출=DB를 변경처리함
+	@RequestMapping(value="/admin/member/member_update", method=RequestMethod.POST)
+	public String updateMember() throws Exception {
+		
+		return null;
+	}
+	//아래경로는 수정폼을 호출=화면에 출력만=렌더링만 
+	@RequestMapping(value="/admin/member/member_update_form", method=RequestMethod.POST)
+	public String updateMemberForm() throws Exception {
+		
+		return "admin/member/member_update";//상대경로
+	}
 	@RequestMapping(value="/admin/member/member_delete", method=RequestMethod.POST)
 	public String deleteMember(MemberVO memberVO) throws Exception {
 		logger.info("디버그: " + memberVO.toString());

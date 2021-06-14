@@ -9,8 +9,11 @@
 - 수업접 관리자 회원관리 view 화면구현 마무리
 - multipart(첨부파일)라는 폼태그 전송방식을 추가-->commons.fileupload 외부모듈필수(pom.xml에서 의존성 추가)
 - 위 외부모듈을 스피링빈으로 등록합니다(servlet-context.xml 하단에 추가)
-- <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+
+```
+<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
    </beans:bean>
+   ```
 - 나머지 관리자 회원관리 CRUD 화면 JSP처리. insert(x),view>update, insert
 
 #### 20210611 금 작업예정
