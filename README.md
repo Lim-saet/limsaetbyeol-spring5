@@ -14,6 +14,10 @@
 <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
    </beans:bean>
    ```
+- 데이터 변수를 전송할때 GET(URL쿼리스트링기본값)으로 전송받으면, 타도메인에서도 GET으로 접근이 가능합니다
+- 쉽게 말하면, 다른 도메인(서버)에서 GET은 검색만 가능 입력,수정,삭제 불가능
+- 단, 데이터 변수를 POST(숨김)으로 전송받으면, 타 도메인에서는 접근이 불가능 
+- 쉽게말하면 같은 도메인(서버)에서만 POST로는 입력/수정/삭제가 가능 
 - 나머지 관리자 회원관리 CRUD 화면 JSP처리. insert(x),view>update, insert
 
 #### 20210611 금 작업예정
