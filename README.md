@@ -5,6 +5,9 @@
 3. 문서작업(화면기획서XLS 제작, 화면설계서PPT 제작)
 - 헤로쿠 클라우드에 배포할때 매퍼폴더의 mysql폴더내의 쿼리에 now()를 date_add(now(3),interval 9 HOUR)변경예정
 
+#### 20210615 화 작업예정
+- 회원관리 CRUD 화면 JSP구현 update(ok) delete(ok), insert(예정)
+
 ####20210614 월 작업예정
 - 수업접 관리자 회원관리 view 화면구현 마무리
 - multipart(첨부파일)라는 폼태그 전송방식을 추가-->commons.fileupload 외부모듈필수(pom.xml에서 의존성 추가)
