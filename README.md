@@ -5,19 +5,27 @@
 3. 문서작업(화면기획서XLS 제작, 화면설계서PPT 제작)
 - 헤로쿠 클라우드에 배포할때 매퍼폴더의 mysql폴더내의 쿼리에 now()를 date_add(now(3),interval 9 HOUR)변경예정
 
+####20210614 월 작업예정
+- 수업접 관리자 회원관리 view 화면구현 마무리
+- multipart(첨부파일)라는 폼태그 전송방식을 추가-->commons.fileupload 외부모듈필수(pom.xml에서 의존성 추가)
+- 위 외부모듈을 스피링빈으로 등록합니다(servlet-context.xml 하단에 추가)
+- <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+   </beans:bean>
+- 나머지 관리자 회원관리 CRUD 화면 JSP처리. insert(x),view>update, insert
+
 #### 20210611 금 작업예정
 - 정방향 개발: 메퍼쿼리>DAO>Service>[JUnit-IoC,DI구현]컨트롤러클래스>JSP
 - 역박향 개발(클래스간 이동 빨라서: 정방행으로 개발한 것 
 - 수업전 관리자단 회원관리 페이징처리에서 컨트롤러와 calcPage()메서드의 관계 간단하게 확인
 - JSTL: Java Standard Tag Library 자바표준태그모듈 JSP에서 자바를 사용하는 표준
 - taglib uri(유니폼 리소스 ID-식별값) > url(고유값)
-- prefix(접두어), 태그별칭사용 예: <c
+- prefix(접두어), 태그별칭사용 예: <c 시작
 - ===========3주간 작업내역 시작(관리자단-제일 손이 많이감)=================
 - 관리자단 회원목록 처리 마무리(1.페이징및 검색기능구현).ok
 - model을 이용해서 결과를 JSP로 구현.(2.JSP화면은 표준언어인 JSTL로 구현)
 - [공지]06-17 목요일(4교시) UI 디자인 시험 있습니다.(화면기획서XLS제작, 화면설계서PPT제출)
 - 그래서, 다음주 월요일 점심시간 피곤할떄 현재 프로젝트를 정리하는 문서작업 시간을 갖겠습니다.
-- 나머지 관리자 회원관리 CRUD 화면 JSP처리. insert(x),view>update, insert
+
 - 관리자단 게시판 생성관리 CRUD 처리.(3.AOP기능구현).
 - 관리자단 게시물관리 CRUD 처리(4.파일업로드구현,5.트랜잭션구현).
 - 관리자단 댓글 CRUD 처리(6.RestAPI기능구현-개발트렌드).
