@@ -5,8 +5,11 @@
 3. 문서작업(화면기획서XLS 제작, 화면설계서PPT 제작)
 - 헤로쿠 클라우드에 배포할때 매퍼폴더의 mysql폴더내의 쿼리에 now()를 date_add(now(3),interval 9 HOUR)변경예정
 
+#### 20210616 수 작업예정
+
+
 #### 20210615 화 작업예정
-- 회원관리 CRUD 화면 JSP구현 update(ok) delete(ok), insert(예정)
+- 회원관리 CRUD 화면 JSP구현 update(ok) delete(ok), insert(ok)
 - 관리자단 회원관리 수정 암호 수정 잘 되는지 확인예정 ok
 
 
