@@ -83,7 +83,7 @@
             <!-- /.card-body -->
 
             <div class="card-footer text-right">
-              <button type="submit" class="btn btn-primary disabled" id="btn_insert" disabled>등록</button>
+              <button type="submit" class="btn btn-primary" id="btn_insert" disabled>등록</button>
               <button type="button" class="btn btn-default" id="btn_list">목록</button> 
             </div>
             <input name="page" type="hidden" value="${pageVO.page}">
@@ -119,7 +119,7 @@ $(document).ready(function(){
 				}
 				if(result==1){//중복ID가 있다면 진행중지
 					$("#btn_insert").attr("disabled",true);//등록버튼 비활성화
-					 alert("중복ID가 존재합니다. 다시입력해주세요!");
+					 alert("올바르지 않거나 중복ID가 존재합니다. 다시입력해주세요!");
 				}
 			},
 			error:function(){
