@@ -8,6 +8,7 @@ package com.edu.vo;
   * 검색에 사용되는 변수(쿼리변수만): 검색어(search_keyword), 검색조건(search_type)
  */
 public class PageVO {
+	private String board_type;//게시판 종류를 표시하는 전용 변수 클래스 추가 
 	private int queryStartNo;//쿼리전용 변수, 페이징쿼리에서 시작 페이지 인덱스 번호표시 변수
 	private int queryPerPageNum;//쿼리전용, 페이징쿼리에서 1페이지당 출력할 개수표시 변수 
 	private Integer page;//jsp에서발생 자바전용.int인데 Null값을 허용. 자바전용.int인데 Null값을 허용 
