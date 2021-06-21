@@ -21,7 +21,12 @@ public class PageVO {
 	private String search_keyword;//jsp에서 받은 검색어 쿼리전용 변수
 	private String search_type;//검색조건에 해당 쿼리전용 변수
 	
-
+	public String getBoard_type() {
+		return board_type;
+	}
+	public void setBoard_type(String board_type) {
+		this.board_type = board_type;
+	}
 	@Override
 	public String toString() {
 		return "PageVO [queryStartNo=" + queryStartNo + ", queryPerPageNum=" + queryPerPageNum + ", page=" + page
