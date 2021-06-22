@@ -1,5 +1,7 @@
 package com.edu.util;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -26,7 +28,22 @@ public class CommonUtil {
 	@Inject
 	private IF_MemberService memberService;//스프링빈 주입받아서(DI) 객체준비
 	
-     //ResrAPI서버 맛보기 ID중복체크 (제대로 만들면 @RestController 사용)
+	//첨부파일이 이미지인지 아닌지 확인하는 데이터 생성
+	private ArrayList<String> checkImgArray = new ArrayList<String>() {
+		{
+		add("gif");
+		add("jpg");
+		add("jpeg");
+		add("png");
+		add("bmp");
+		}
+	};
+	
+     public ArrayList<String> getCheckImgArray() {
+		return checkImgArray;
+	}
+
+	//ResrAPI서버 맛보기 ID중복체크 (제대로 만들면 @RestController 사용)
 	@RequestMapping(value="/id_check",method=RequestMethod.GET)
 	@ResponseBody //반환받는 값의 헤더값을 제외하고, 내용(body)만 반환하겠다는 것을 명시 
 	public String id_check(@RequestParam("user_id")String user_id) throws Exception {
