@@ -41,6 +41,7 @@
               <!-- 첨부파일을 전송할때 enctype=필수 없으면, 첨부파일이 전송X -->
               <form
                 name="form_view"
+                method="post"
                 action="/admin/board/board_update_form"
                 enctype="multipart/form-data"
               >
@@ -271,13 +272,18 @@
 <%@ include file="../include/footer.jsp" %>
 <script>
 $(document).ready(function(){
+	var form_view = $("form[name='form_view']");//전역변수
 	$("#btn_list").click(function(){
-		var form_view = $("form[name='form_view']");
+		//여기서는 함수내 변수
 		form_view.attr("action","/admin/board/board_list");
+		form_view.arrt("method","get");//폼의 설정된 메서드 post에서 get으로 변경
 		form_view.submit();
 	});
 		$("#btn_delete").click(function(){
-	alert('준비중입니다.');
+			if(confirm('정말로 삭제 하시겠습니까?')) {//yes,를클릭하면 아래내용 실행
+				form_view.attr("action","/admin/board/board_delete");
+				form_view.submit();
+			}
 		});
 });
 </script>

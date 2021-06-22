@@ -48,7 +48,7 @@ public class AspectAdvice {
 		//일반적인 컨트롤러에서는 매개변수 HttpServeletRequest를 사용가능함 위처럼 복잡하게 구하지않음 
 		//컨트롤러 클래스에서 매개변수로 받을 값(board_type) < pageVO
 		PageVO pageVO = null;
-		String board_type = "";//jsp에서 전송되는 값을  임시로 저장,목적은 세션변수 발생조건으로 사용
+		String board_type = null;//jsp에서 전송되는 값을  임시로 저장,목적은 세션변수 발생조건으로 사용
 		//조인포인트리스트의 객체의 메서드를  Arguments(매개변수)1개씩 뽑아냅
 		for(Object object:pjp.getArgs()) {
 			if(object instanceof PageVO) {
