@@ -6,6 +6,50 @@
 - 헤로쿠 클라우드에 배포할때 매퍼폴더의 mysql폴더내의 쿼리에 now()를 date_add(now(3),interval 9 HOUR)변경예정
 
 #### 20210624 수 작업예정
+- 시큐어코딩 방지메서드: <(O|o)bject...->&lt;object (목적은 코딩태그를 특수문자로 변경하는 메서드)
+- 실행되지 않는 코드가 생성됨
+- 세션사용법: 겟(Get),셋(Set),삭제(Remove) 하는방법
+- 세션생성법: session.setAttribute("세션변수명","값");//로그인 세션변수 생성
+- 세션 값 불러오기: session.getAttribute("세션변수명");
+- 세션 삭제하기: session.removeAttribute("세션변수명");//변수삭제
+- 전체 세션 삭제하기: session.invalidate();//전체세션변수명을 삭제 = 세션초기화
+- 수업전 작업예정: ie11이하계열에서 한글 검색 후 페이지 선택시 400에러발생(크롬계열은 문제없음)-AOP로처리.
+- 작업순서: CRUD -> UC 작업예정.
+- 업데이트 이후엔 파일업로드 구현 후 /download 컨트롤러 실습예정.
+- update: updateBoard(서비스)참조 -> board_update(컨트롤러)작업+jsp작업
+- 관리자단 댓글관리 CRUD 처리(6.RestAPI서버구현,JUnit대신에 크롬부메랑으로 테스트)
+
+```
+내일 수업전 실숩 순서는 아래와 같습니다.
+아래 순서대로 하시고, 개선된 기능은 수업시 알려 드리겠습니다.^^
+ie에서 한글검색과 페이징처리 함께사용시 에러상황 처리
+AOP로 처리 되었습니다.
+-#1 AOP에서 아래내용 추가
+String search_keyword = null;
+search_keyword = pageVO.getSearch_keyword();
+if(search_keyword != null) {//최초로 세션변수가 발생
+   session.setAttribute("session_search_keyword", search_keyword);
+}
+if(session.getAttribute("session_search_keyword") != null) {
+   search_keyword = (String) session.getAttribute("session_search_keyword");
+   if(pageVO != null) {//Set은 pageVO가 null아닐 경우만 실행되도록
+      pageVO.setSearch_keyword(search_keyword);//검색목표달성:여기서 항상 값을 가져가도록 구현됩니다.
+   }
+}
+-#2 member와 board 뷰jsp파일에서 아래 내용을 일괄 삭제
+&search_keyword=${pageVO.search_keyword}
+-#3 AdminController에서 아래 내용 일괄 삭제
++"&search_keyword="+pageVO.getSearch_keyword()
+-#4. 기능개선 추가
+AspectAdvice클래스 PageVO가 메서드매개변수 인스턴트인 조건시 추가
+if(pageVO.getPage() == null) {
+ session.removeAttribute(“session_search_keyworb”);
+}
+또는
+검색창에 ${session_search_keyword}추가
+그리고, include폴더 header.jsp 에 링크값에 ?search_type= 추가
+```
+
 
 ####20210622 화 작업예정
 - 정방향으로 개발시작.VO제작.->매퍼쿼리제작-> DAO클래스제작->Service 클래스 제작 -> Controller+jsp
