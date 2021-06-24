@@ -13,7 +13,8 @@ List<AttachVO> delfiles = [
 {"save_file_name":"abc2.jpg","real_file_name":"한글이미지2.jpg","bno":"bno10"}
 ]
 - file.getBytes() 설명 포함 board_update메서드 리뷰 후 수업진행.
-- 작업순서: CRUD -> UC 작업.
+- 작업순서: CRUD -> U 작업.ok
+- Creat작업
 - update: updateBoard(서비스)참조 -> board_update(컨트롤러)작업+jsp작업
 - 업데이트 이후엔 파일업로드 구현 후 /download 컨트롤러 실습예정.
 - 관리자단 댓글관리 CRUD 처리(6.RestAPI서버구현,JUnit대신에 크롬부메랑으로 테스트)
