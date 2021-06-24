@@ -74,8 +74,8 @@ public class CommonUtil {
 		add("bmp");
 		}
 	};
-	
-     public ArrayList<String> getCheckImgArray() {
+
+	public ArrayList<String> getCheckImgArray() {
 		return checkImgArray;
 	}
 
@@ -102,7 +102,10 @@ public class CommonUtil {
 		//폴더에 저장할 PK파일명을 생성 (아래)
 		UUID uid = UUID.randomUUID();// 유니크ID값생성
 		String saveFileName = uid.toString() + "." + StringUtils.getFilenameExtension(realFileName);
-		byte[] fileData = file.getBytes();
+		//file의 MultipartFile클래스형 객체. 클래스형 자료(멤버변수,메서드...)는 직접 파일저장을 할 수 없음
+		//그래서 바이트형으로 파싱(변환)해서 저장해야함 -> bit형(010100001)이진형 or 비트형
+		//자바자료형 정수: byte(bit구설)<short<int<long, 실수형(소수점): float<double
+		byte[] fileData = file.getBytes();// getBytes메서드를 데이터를 bit형으로 파싱해서 저장
 		File target = new File(uploadPath, saveFileName);
 		FileCopyUtils.copy(fileData, target);//물리적으로 폴더에 저장됌
 		return saveFileName;

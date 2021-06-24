@@ -5,6 +5,19 @@
 3. 문서작업(화면기획서XLS 제작, 화면설계서PPT 제작)
 - 헤로쿠 클라우드에 배포할때 매퍼폴더의 mysql폴더내의 쿼리에 now()를 date_add(now(3),interval 9 HOUR)변경예정
 
+#### 20210625 목 작업예정
+- [복습]오늘 작업한 첨부파일 처리도 데이터 변수의 이동상태나 변수값이 제일 중요합니다.
+핵심은 아래와 같습니다. Attach테이블에서 select쿼리 결과 테이터 구조는 아래와 같습니다.
+List<AttachVO> delfiles = [
+{"save_file_name":"abc1.jpg","real_file_name":"한글이미지1.jpg","bno":"bno10"},
+{"save_file_name":"abc2.jpg","real_file_name":"한글이미지2.jpg","bno":"bno10"}
+]
+- file.getBytes() 설명 포함 board_update메서드 리뷰 후 수업진행.
+- 작업순서: CRUD -> UC 작업.
+- update: updateBoard(서비스)참조 -> board_update(컨트롤러)작업+jsp작업
+- 업데이트 이후엔 파일업로드 구현 후 /download 컨트롤러 실습예정.
+- 관리자단 댓글관리 CRUD 처리(6.RestAPI서버구현,JUnit대신에 크롬부메랑으로 테스트)
+
 #### 20210624 수 작업예정
 - 시큐어코딩 방지메서드: <(O|o)bject...->&lt;object (목적은 코딩태그를 특수문자로 변경하는 메서드)
 - 실행되지 않는 코드가 생성됨

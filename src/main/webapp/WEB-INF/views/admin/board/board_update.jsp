@@ -51,7 +51,7 @@
               </div>
               <div class="form-group">
                 <label for="content">글내용</label>
-                <textarea name="content" id="content" class="form-control" placeholder="내용을 입력해주세요." required>${boardVO.content}</textarea>
+                <textarea name="content" id="content" class="form-control" placeholder="내용을 입력해주세요.">${boardVO.content}</textarea>
               </div>
               <div class="form-group">
                 <label for="writer">작성자</label>
@@ -129,14 +129,21 @@
 				['style',['bold','italic','underline']],
 				['color',['forecolor','color']],
 				['table',['table']],
-				['para',['ul','ol','papragraph']],
+				['para',['ul','ol','paragraph']],
 				['height',['height']],
-				['insert',['link','video']],//'picture'
+				['insert',['link','video']],//'picture',
                 ['view',['fullscreen','help']]
 			],
 			fontNames: ['Arial','Arial Black','맑은 고딕','궁서'],
             fontSizes: ['8','10','12','14','16','18','20','22','24','26','28','30'],
 			fontNamesIgnoreCheck: ['Nanum Gothic']
 		}); 
+		//서머노트에서 html5의 required 속성 작동이 안되기 때문에 아래 코드 추가
+		$("form[name='form_write']").on('submit',function(event){
+			if($('#content').summernote('isEmpty')) {
+				alert('내용은 반드시 입력해주세요');
+				event.preventDefault();//submit전송기능 사용금지
+			}
+		});
 	});
 </script>
