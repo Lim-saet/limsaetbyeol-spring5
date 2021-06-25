@@ -30,7 +30,7 @@
         <!-- 콘텐츠내용 -->
         <div class="card card-primary">
           <div class="card-header">
-            <h3 class="card-title">등록</h3>
+            <h3 class="card-title">수정</h3>
           </div>
           <!-- /.card-header -->
           <!-- form start -->
@@ -70,7 +70,12 @@
                   <!-- 기존 업로드된 파일을 수정폼에 보여주기, 삭제 버튼 필요 (아래) -->
                   <c:if test="${boardVO.save_file_names[idx] !=null}">
                   <p class="text-muted">
-                  <a href="/download?save_file_name=${boardVO.save_file_names[idx]}&real_file_name=${boardVO.real_file_names[idx]}">
+                  <c:url value="/download" var="downLoadUrl">
+                    <c:param name="save_file_name" value="${boardVO.save_file_names[idx]}" />
+                    <c:param name="real_file_name" value="${boardVO.real_file_names[idx]}" />  
+                  </c:url>
+				  <a href="${downLoadUrl}">
+                  <%-- <a href="/download?save_file_name=${boardVO.save_file_names[idx]}&real_file_name=${boardVO.real_file_names[idx]}"> --%>
                   	${boardVO.real_file_names[idx]}
                   	</a>
                   	&nbsp;<button type="button" class="btn btn-info btn_file_delete">삭제</button>
