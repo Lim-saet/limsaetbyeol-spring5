@@ -11,7 +11,7 @@ import com.edu.vo.ReplyVO;
  *
  */
 public interface IF_ReplyService {
-	public void deleteReply(Integer rno) throws Exception;
+	public void deleteReply(ReplyVO replyVO) throws Exception;
 	public void updateReply(ReplyVO replyVO) throws Exception;
 	public void insertReply(ReplyVO replyVO) throws Exception;//replyVO jsp폼에서
 	public int countReply(Integer bno) throws Exception;

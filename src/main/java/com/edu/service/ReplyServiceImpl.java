@@ -12,8 +12,8 @@ import com.edu.vo.PageVO;
 import com.edu.vo.ReplyVO;
 
 /**
- * 이 클래스는 댓글 DAO에 CRUD를 호출하는 실행하는 서비스 클래스 입니다.
- * @author 임샛별
+ * 이 클래스는 댓글 DAO의 CRUD를 실행하는 서비스 클래스 입니다.
+ * @author 김일국
  *
  */
 @Service
@@ -26,7 +26,7 @@ public class ReplyServiceImpl implements IF_ReplyService {
 	public void deleteReply(ReplyVO replyVO) throws Exception {
 		// TODO 2개의 DAO를 호출(실행)
 		replyDAO.deleteReply(replyVO);
-		//현재게시물 고유번호 bno가 필요
+		// 현재 게시물 고유번호 bno가 필요.
 		replyDAO.replyCountUpdate(replyVO.getBno(), -1);
 	}
 
@@ -34,16 +34,14 @@ public class ReplyServiceImpl implements IF_ReplyService {
 	public void updateReply(ReplyVO replyVO) throws Exception {
 		// TODO 
 		replyDAO.updateReply(replyVO);
-		
 	}
 
-	@Transactional// All or NotAll 
+	@Transactional // ALL or NotALL 모 아니면 도
 	@Override
 	public void insertReply(ReplyVO replyVO) throws Exception {
 		// TODO 2개의 DAO를 호출(실행)
 		replyDAO.insertReply(replyVO);
 		replyDAO.replyCountUpdate(replyVO.getBno(), 1);
-
 	}
 
 	@Override
@@ -54,7 +52,7 @@ public class ReplyServiceImpl implements IF_ReplyService {
 
 	@Override
 	public List<ReplyVO> selectReply(PageVO pageVO) throws Exception {
-		// TODO DAO 객체
+		// TODO DAO객체 사용
 		return replyDAO.selectReply(pageVO);
 	}
 
