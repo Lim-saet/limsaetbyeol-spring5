@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,12 +29,34 @@ import com.edu.vo.ReplyVO;
  */
 @RestController
 public class ReplyController {
+	private Logger logger = LoggerFactory.getLogger(ReplyController.class);
 	@Inject
 	private IF_ReplyService replyService;
 	
+	//댓글 삭제를 RestFul로 처리
+	@RequestMapping(value="reply/reply_delete", method=RequestMethod.DELETE)
+	public ResponseEntity<String> reply_delete() {
+		ResponseEntity<String> result = null;
+		//삭제기능은 내일다시
+		return result;
+	}
+	//댓글은 Read가 필요없음 왜냐하면 Select로 가져온 값은 Ajax로 처리하기 때문에 쿼리를 날릴 필요가 없습니다
+	//그래서, 바로 Update를 처리합니다-Update시 Read쿼리가 없고 Ajax 처리함
+	@RequestMapping(value="reply/reply_update", method=RequestMethod.PATCH)
+	public ResponseEntity<String> reply_update(@RequestBody ReplyVO replyVO) {
+		//@RequestBody jsp에서 $.ajax로 받는 데이터값 <-> @ResponseBody
+		ResponseEntity<String> result = null;
+		try {
+			replyService.updateReply(replyVO);
+			result = new ResponseEntity<String>("success",HttpStatus.OK);
+		} catch (Exception e) {
+			result = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return result;//Restful방식은 항상 반환값이 (Body:String, Hasmp-json부분) 존재합니다
+	}
 	//댓글등록@RequestBody는 jsp에서 Ajax메서드로 보내온 값을 받을 때 사용하는 애노테이션입니다
 	@RequestMapping(value="/reply/reply_insert", method=RequestMethod.POST)
-	public ResponseEntity<String> reply_write(@RequestBody ReplyVO replyVO) {
+	public ResponseEntity<String> reply_insert(@RequestBody ReplyVO replyVO) {
 		//ResponseEntity == ResponseBody
 		ResponseEntity<String> result = null;
 		//개발자가 스프링에 예외를 throws하지않고 직접처리 try~catch하는 목적:
@@ -43,7 +67,7 @@ public class ReplyController {
 					
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			result = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			result = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		return result;
@@ -88,11 +112,13 @@ public class ReplyController {
 			//더미데이터 대신에 DB데이터를 가져와서 사용
 		//====================================================
 		//아래 resultMap을 만든 목적은: 위 List객체를 ResponseEntity객체의 매개변수로 사용.
-		Map<String,Object> resultMap = new HashMap<String,Object>();
+		
 		//아래의 Json데이터형태는 일반컨트롤러에서 사용했던 model사용해서 ("변수명",객체내용) 전송한 방식과 동일
 		if(pageVO.getTotalCount() > 0) {
-		resultMap.put("replyList", replyService.selectReply(pageVO));
+			Map<String,Object> resultMap = new HashMap<String,Object>();
+		resultMap.put("replyList", replyService.selectReply(bno, pageVO));
 		resultMap.put("pageVO", pageVO);
+		logger.info("여기까지");
 		//객체를 2개 이상 보내게 되는 상황일때, Json데이터형태(key:value)로 만들어서 보냅니다. 
 		//--------------------------------------------------------
 		
