@@ -149,7 +149,7 @@
                 </div>
                 <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
                 <button type="button" class="btn btn-warning" id="btn_reply_write">댓글등록</button>
-                <input type="hidden" value="" id="reply_page">
+                <input type="hidden" value="1" id="reply_page">
                 </div>
               </div>
               </div>
@@ -273,10 +273,40 @@ var printPagingList = function(pageVO, target) {
 	pagination += '</li>';
 	$(target).append(pagination);
 };
+//함수형변수로서 댓글 리스트를 RestApi에서 받아서 출력하는 변수
+var replyList = function() {
+	var page = $("#reply_page").val();
+	$.ajax({
+		type:"post",
+		url:"/reply/reply_list/${boardVO.bno}/"+page,
+		dataType:"",//전송받는 데이터형태
+		success:function(result) {
+			if(typeof result=="undefined" || result == "" || result == null) {
+				$("#collpseReply").empty();//div태그 안의 내용 삭제하기 
+				$("#collpseReply").html('<div classs="pagination justify-content-center"><ul class="pagination pageVO">조회된 값이 없습니다.</ul></div>');//dic태그 안의 html 내용을 추가하기
+			} else {
+				//json데이터를 화면에 파싱합니다(구번, xml복잡한 개그 데그 )
+				//템플릿 빵틀에 Resut데이터를 바인딩해서 출력
+				//JSON.parse(텍스트)->일반문자열을 json으로 변경하는 함수
+				//JSON.stringify(json데이터)->json데이터를 일반 문자열로 변경하는 함수
+				console.log("여기까지" + JSON.stringify(result.replyList));//크롬 콘솔에서확인
+				printReplyList(result.replyList, $("#template"), $('#collapseReply'));
+			}
+		},
+		error:function() {
+			alert("RestAPI서버가 작동하지 않습니다. 다음에 이용해주세요.");
+		}
+	});
+};
 </script>
 <script>
 //댓글 CRUD처리
 $(document).ready(function(){
+	//댓글 리스트 버튼(아래)
+	$("#btn_reply_list").click(function(){
+		replyList();//댓글 리스트 출력 Ajax호출
+	});
+	//댓글 등록 버튼(아래)
 	$("#btn_reply_write").click(function(){
 		//RestAPI엔드포인트로 보낼 값 지정
 		var bno = "${boardVO.bno}";//자바변수값:게시물번호
