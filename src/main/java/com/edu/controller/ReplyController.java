@@ -42,7 +42,7 @@ public class ReplyController {
 		replyVO.setRno(rno);
 		try {
 			replyService.deleteReply(replyVO);
-			result = new ResponseEntity<String>("sucess",HttpStatus.OK);
+			result = new ResponseEntity<String>("success",HttpStatus.OK);
 		} catch (Exception e) {
 			result= new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
