@@ -44,6 +44,7 @@
 </style>
 
 <script>
+//공통으로 사용하는 변수
 if("${msg}" != "") {
    alert("${msg}가(이) 성공하였습니다.");
 }
@@ -75,7 +76,7 @@ if("${msg}" != "") {
 					<!-- 로그인 후 보이는 메뉴(아래) -->
 						<li><a href="#">${session_username} 님 환영합니다.</a></li>
 						<li><a href='/logout'>로그아웃</a></li>
-						<li><a href="mypage.html">마이페이지</a></li>
+						<li><a href="/member/mypage_form">마이페이지</a></li>
 						<!--ROLE_ADMIN권한만 AdminLTE에 가능하게 조건 추가-->
 						<c:if test="${session_levels eq 'ROLE_ADMIN'}">
 						<li><a href="/admin">AdminLTE</a></li>

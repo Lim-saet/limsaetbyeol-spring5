@@ -67,4 +67,10 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	<!-- 로그인세션이 풀리는 시간 지정하기 -->
+	<session-config>
+	<session-timeout>
+	60
+	</session-timeout>
+	</session-config>
 </web-app>
