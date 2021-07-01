@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="./include/header.jsp" %>
-
+<script>
+//로그인 실패 전용 메세지
+if("${param.msg}" == "fail") {
+	alert("로그인 실패입니다. 다시 입력해주세요!");
+}
+</script>
  <!-- 게시판용 CSS 임포트 -->
     <link rel="stylesheet" href="/resources/home/css/board.css" />
 
@@ -35,7 +40,7 @@
                 <li class="clear">
                   <label for="id_lbl" class="tit_lbl pilsoo_item">아이디</label>
                   <div class="app_content">
-                    <input type="text" name="user_id" class="w100p" id="id_lbl"
+                    <input autofocus type="text" name="user_id" class="w100p" id="id_lbl"
                     placeholder="아이디를 입력해주세요" required/>
                   </div>
                 </li>
