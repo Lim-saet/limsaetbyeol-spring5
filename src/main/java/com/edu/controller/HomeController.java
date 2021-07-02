@@ -43,11 +43,21 @@ public class HomeController {
     @Inject
     private IF_MemberService memberService;
     
+    
+    //404파일 에러 처리 GET 호출 추가 
+    @RequestMapping(value="/home/error/error_404", method=RequestMethod.GET)
+    public String error_404() {
+    	return "home/error/error_404";//.jsp생략
+    }
+    
     //회원가입 처리 호출 POST방식
     @RequestMapping(value="/join",method=RequestMethod.POST)
     public String join(MemberVO memberVO, RedirectAttributes rdat) throws Exception {
     	//jsp폼에서 levels를 ROLE_ADMIN으로 해킹할까봐 여기서 강제로 입력
-    	//memberVO.setLevels("ROLE_USER");//회원레벨이 2개뿐이라서 여기서 강제로 입력 
+    	//rawPassword암호를 스프링시큐리티로 인코딩합니다(아래)
+    	String rawPassword = memberVO.getUser_pw();
+    	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    	memberVO.setUser_pw(passwordEncoder.encode(rawPassword));//암호화실행
     	memberService.insertMember(memberVO);
     	rdat.addFlashAttribute("msg", "회원등록");//회원가입 가(이) 성공했습니다 출력
     	return "redirect:/login_form";//페이지 리다이렉트로 이동 
