@@ -40,7 +40,7 @@
               digits: "숫자만 입력 가능합니다.",
               equalTo: "비밀번호가 일치하지 않습니다."
         });
-    });
+});
     </script>
 <!-- 메인콘텐츠영역 만 변경됩니다. -->
       <div id="container">
@@ -158,7 +158,6 @@
                   <div class="app_content radio_area">
                     <select name="enabled" class="gender" required>
                       <option value="${memberVO.enabled}"> ${memberVO.enabled=='true'?'허용':'금지'}</option>
-                      
                    </select>
                   </div>
                 </li>
@@ -197,10 +196,19 @@
 <script>
 $(document).ready(function(){
 	$("#btn_leave").click(function(){
-		//alert("삭제버튼 준비중 입니다");
+		if(confirm('정말로 탈퇴하시겠습니까?')) {
+			//alert("삭제버튼 준비중 입니다");
 		var form_leave = $("form[name='join_form']");
-		alert($("select[name='enabled']").val());
+		$("option:eq(0)", "select[name='enabled']").val("false");//에러SET input태그o
+		//$("select[name='enabled']").html("<option value='false'>탈퇴</option>");//select Set
+		//alert($("select[name='enabled']").val());//GET
 		//위 값을 false,0 둘 중 1개로 변경 후 submit예정
+		form_leave.attr("action","/member/mypage_leave")//크롬오동작으로 추가한 코드
+		form_leave.submit();//삭제는 아니고 enabled 필드값을 수정합니다
+		//탈퇴를 했다면, 로그아웃처리도 같이 되어야함
+		//location.replace("/logout");
+		}
+		
 	});
 });
 </script>
