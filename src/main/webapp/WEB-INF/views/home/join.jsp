@@ -122,8 +122,8 @@ $(document).ready(function() {
 
 <%@ include file="./include/footer.jsp" %>
 <script> 
-$(document.ready(function(){
-	$("#btn_insert").click(function(){
+$(document.ready(function(){           
+	$("#btn_insert").click(function(){     
 		alert("준비중입니다");
 	});
 	$("#user_id_lbl").change(function(){
