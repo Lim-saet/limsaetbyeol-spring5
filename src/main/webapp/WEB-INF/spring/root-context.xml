@@ -8,6 +8,20 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- properties를 불러오는 스피링빈을 만듭니다.(아래) -->
+	<bean id="propertyConfigure" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+		<list>
+			 
+			<!-- <value>classpath:/properties/oracle.properties</value> -->
+			
+			<value>classpath:/properties/cloude.properties</value>
+			
+			<!-- <value>classpath:/properties/hsql.properties</value> -->
+		</list>
+		</property>
+	</bean>
 	<!-- 알리아스(Alias별명) dataSource로 만듦 이유는 여러개의 DB와 호환되게 만들게됌 -->
 	<!--오라클지원, Mysql, Hsql 등 여러 DB서버와 호환되게 만드는데 필요(아래)-->
 	<alias name="dataSource-${DbType}" alias="dataSource"/>
@@ -23,21 +37,23 @@
 	</bean>
     	
     <!-- 위  생성DB파일에 더미데이터 생성시키는 스크립트문장(아래) 최초 1회만 실행-->
+    <!-- hsql이 아닌 다른 DB일때는 주석처리필수 -->
     	<jdbc:initialize-database data-source="dataSource" ignore-failures="DROPS"> 
 		<jdbc:script location="classpath:/db_script/hsql_file.sql" /> 
 	</jdbc:initialize-database>
-    <!-- hsql 데이터베이스 매니저실행 /embeded/hsql_file.db를 매니저에서 불러옴-->
+	
+    <!-- hsql 데이터베이스 매니저실행 /embeded/hsql_file.db를 매니저에서 불러옴 -->
     <bean depends-on="dataSource-hsql_local"
 	class="org.springframework.beans.factory.config.MethodInvokingBean">
 	<property name="targetClass" value="org.hsqldb.util.DatabaseManagerSwing" />
 	<property name="targetMethod" value="main" />
 	<property name="arguments">
 		<list>
-			<value>--url</value>
+			<value>- -url</value>
 			<value>jdbc:hsqldb:file:c:/embeded/hsql_file.db;hsqldb.lock_file=false</value>
-			<value>--user</value>
+			<value>- -user</value>
 			<value>sa</value>
-			<value>--password</value>
+			<value>- -password</value>
 			<value></value>
 		</list>
 	</property>
