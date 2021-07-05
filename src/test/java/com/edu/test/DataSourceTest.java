@@ -41,7 +41,7 @@ public class DataSourceTest {
     private Logger logger = Logger.getLogger(DataSourceTest.class);
     //dataSource 객체는 데이터베이스객체를 pool로 저장해서 사용할때 DataSource 클래스를 사용(아래)
     @Inject // 인젝트는 스프링에서 객체를 만드는 방법, 이전 자바에서는 new 키워드로 객체를 만들었고.. 
-    DataSource dataSource;//Inject로 객체를 만들면  메모리 관리를 스프링이 대신 해줌
+    private DataSource dataSource;//Inject로 객체를 만들면  메모리 관리를 스프링이 대신 해줌
     //Inject 자바8부터 지원, 그럼, 이전 자바7에서 @Autowired로 객체를 만들었음
     @Inject //MemberService 서비스를 주입받아서 객체를 사용합니다(아래)
     private IF_MemberService memberService;
