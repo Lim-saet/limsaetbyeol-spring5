@@ -1,5 +1,6 @@
 package com.edu.controller;
 
+import java.io.File;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -85,6 +86,22 @@ public class HomeController {
     //public 뷰단 jsp파일명을 리턴형식 콜백함수 (자동실행)
     //return "파일 명";
     
+    //게시물 삭제 처리 호출 POST 추가
+    @RequestMapping(value="/home/board/board_delete",method=RequestMethod.POST)
+    public String board_delete(@RequestParam("bno")Integer bno,RedirectAttributes rdat) throws Exception {
+    	//부모테이블 삭제전 삭제할 파일들 변수로 임시저장(아래)
+    	List<AttachVO> delFiles = boardService.readAttach(bno);//세로값
+    	//테이블 1개레코드 삭제처리
+    	boardService.deleteBoard(bno);
+    	//첨부파일 있으면 삭제
+    	for(AttachVO file:delFiles) {//향상된 for문에서 실행조건이 필요없음 
+    		File target = null; 
+    	}
+    	
+    	
+    	rdat.addFlashAttribute("msg", "게시물삭제");//성공시 메세지 출력용 변수
+    	return "redirect:/home/board/board_list";//성공시 이동할 주소
+    }
     //게시물 상세보기 호출 GET 추가
     @RequestMapping(value="/home/board/board_view",method=RequestMethod.GET)
     public String board_view(Model model, @RequestParam("bno")Integer bno,@ModelAttribute("pageVO")PageVO pageVO) throws Exception {
@@ -95,12 +112,16 @@ public class HomeController {
     	String[] real_file_names = new String[listAttachVO.size()];
     	int index= 0;
     	for(AttachVO file:listAttachVO) { //세로데이터를 가로데이터로 변경처리
-    		
-    		
+    		save_file_names[index] = file.getSave_file_name();
+    		real_file_names[index] = file.getReal_file_name();
+    		index = index + 1;
     	}
-    	
+    	BoardVO boardVO = boardService.readBoard(bno);//1개의 레코드가 입력됌
+    	boardVO.setSave_file_names(save_file_names);
+    	boardVO.setReal_file_names(real_file_names);
     	//db테이블 데이터 가져오기
-    	model.addAttribute("boardVO", boardService.readBoard(bno));
+    	model.addAttribute("boardVO", boardVO);
+    	model.addAttribute("checkImgArray", commonUtil.getCheckImgArray());
     	return "home/board/board_view";//.jsp생략
     }
     //게시물 등록 처리 POST 추가

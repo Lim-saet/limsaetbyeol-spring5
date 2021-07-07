@@ -34,7 +34,7 @@ public class AspectAdvice {
 	@Inject
 	private IF_BoardTypeService boardTypeService;
 	
-	//나중엑 게시물관리 기능 만들때 @Aspect로 AOP기능 추가 = 목적:board_type값을 항상 가져 가도록 처리(세션)
+	//나중에 게시물관리 기능 만들때 @Aspect로 AOP기능 추가 = 목적:board_type값을 항상 가져 가도록 처리(세션)
 	//세션? 서버-PC 구조상에서 클라이언트가 서버에 접속할때 [서버에 발생되는 정보를 세션이라고 함(서버에 저장됨)]
 	//쿠키? 서버-PC 구조상에서 클라이언트가 서버에 접속할때 클라이언트에 발생되는 정보를 쿠기라고함(PC에 저장됨)
 	//옛날에는 쿠키로 로그인 체크를 했음.->보안상 PC에 로그인정보가 저장되기 때문에 위험(인터넷광고에만사용)->세션만사용

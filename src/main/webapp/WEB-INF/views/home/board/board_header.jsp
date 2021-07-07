@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <!-- 폰트어썸 CSS 임포트 -->
+    <link
+      rel="stylesheet"
+      href="/resources/admin/plugins/fontawesome-free/css/all.min.css"
+    />
 <!-- 부투스트랩 CSS코어 임포트 -->
 <link rel="stylesheet" href="/resources/admin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
 <!-- 부트스트랩 JS코어 임포트 -->
@@ -14,10 +19,10 @@
 		bsCustomFileInput.init();
 	});
 </script>
-<!-- 섬머노트 웹에디터CSS 임포트 -->
+<!-- 서머노트 웹에디터CSS 임포트 -->
 <link rel="stylesheet" href="/resources/admin/plugins/summernote/summernote-bs4.min.css">
 <link rel="stylesheet" href="/resources/admin/plugins/summernote/summernote.css">
-<!-- 섬머노트 웹에디터JS 임포트 -->
+<!-- 서머노트 웹에디터JS 임포트 -->
 <script src="/resources/admin/plugins/summernote/summernote.min.js"></script>
 <!-- 서머노트 웹에디터 실행 (아래 개발자가 처리) -->
 <script>
@@ -48,8 +53,20 @@
 </script>    
     <!-- 게시판용 CSS 임포트 -->
 <link rel="stylesheet" href="/resources/home/css/board.css">
-
-
+ <style>
+      /* 모바일용 댓글 스타일 */
+      .row {
+        margin: 0px;
+      }
+      .timeline,
+      .card-default {
+        text-align: left;
+        margin: 0px 5px;
+      }
+      .bs-stepper-content {
+        padding: 20px 10px;
+      }
+</style>
 <!-- 메인상단위치표시영역 -->
 		<div class="location_area customer">
 			<div class="box_inner">
