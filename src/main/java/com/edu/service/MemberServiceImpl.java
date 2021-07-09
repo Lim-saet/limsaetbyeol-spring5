@@ -26,6 +26,8 @@ public class MemberServiceImpl implements IF_MemberService {
     @Inject //IF_MemberDAO를 주입해서 객체로 사용(아래)
      private IF_MemberDAO memberDAO;
     Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
+    
+    
   //헤로쿠 클라우드에 30분휴면상태를 깨우는 기능 추가-->root-context에서 지정한 스케쥴러에서 20분 간격으로 호출됌
   	public void herokuJobMethod() throws Exception {
   		//월~금 오전 8시부터 오후 11(23)시까지 (미국시간 0-14) 헤로쿠앱이 20분간격으로 접근
