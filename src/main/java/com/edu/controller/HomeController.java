@@ -322,11 +322,33 @@ public class HomeController {
     	return "home/login";//.jsp생략
     }
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String homepage(Model model) { //콜백메서드, 자동실행됨
-		String jspVar = "@서비스(DB)에서 처리한 결과"; 
-		model.addAttribute("jspObject", jspVar); 
-		logger.info("디버그 스프링로고사용: " +  jspVar);// System.out 대신 logger 객체를 사용
+	public String homepage(Model model) throws Exception { //콜백메서드, 자동실행됨
+//		String jspVar = "@서비스(DB)에서 처리한 결과"; 
+//		model.addAttribute("jspObject", jspVar); 
+//		logger.info("디버그 스프링로고사용: " +  jspVar);// System.out 대신 logger 객체를 사용
 		//home.jsp파일로 자료를 전송(스프링)하는 기능= model 인터페이스 객체(스프링이처리)에 내용만 채우면 됌 
+		PageVO pageVO = new PageVO();
+		pageVO.setPage(1);//필수값1
+		pageVO.setQueryPerPageNum(3);//갤러리 3개
+		pageVO.setBoard_type("gallery");
+		//첨부파일 save_file_names 배열변수값을 지정
+		List<BoardVO> latestGallery = boardService.selectBoard(pageVO);
+		
+		for(BoardVO boardVO:latestGallery) { //리스트형 객체를 1개씩 뽑아서 1개의 레코드에 입력 반복
+			List<AttachVO> listAttachVO = boardService.readAttach(boardVO.getBno());
+			
+			if(listAttachVO.size() > 0) {
+				String[] save_file_names = new String[listAttachVO.size()];
+				save_file_names[0] = listAttachVO.get(0).getSave_file_name();
+				boardVO.setSave_file_names(save_file_names);
+			}
+		}
+		
+		model.addAttribute("latestGallery", latestGallery);//갤러리 최근게시물
+		
+		pageVO.setQueryPerPageNum(5);//공지사항 5개,보드타입필요(세션으로 처리안됌)
+		pageVO.setBoard_type("notice");
+		model.addAttribute("latestNotice", boardService.selectBoard(pageVO));//공지사항 최근게시물
 		return "home/index"; //확장자가 생략.jsp가 생략되어 있음
 	}
 	
