@@ -19,7 +19,7 @@ import com.github.scribejava.core.oauth.OAuth20Service;
 
 /**
  * 이 클래스는 네이버REST-API서버 URL을 생성하는 기능의 클래스 입니다.
- * @author 임샛별
+ * @author User
  *
  */
 //아래 sns.~만드는 목적: 로컬과 헤로쿠의 인증 ID와 Secret를 소스에서 변경하기보단, 전역변수로 만들면 편함.

@@ -33,12 +33,11 @@ import com.edu.vo.MemberVO;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
 /**
- * 이 클래스는 	스프링 시큐리티의 /login처리한 결과를 받아서 
- * /login_success를 처리하는 클래스 입니다
- * @author 임샛별
+ * 이 클래스는 스프링시큐리티의 /login처리한 결과를 받아서 /login_success
+ * 를 처리하는 클래스 입니다. 
+ * @author 김일국
  *
  */
-
 @Controller
 public class LoginController {
 	Logger logger = LoggerFactory.getLogger(LoginController.class);
@@ -61,16 +60,14 @@ public class LoginController {
 		//위 인증에 사용된 토큰은 네이버에 제공된 프로필정보를 가져올때 토큰이 필요함.
 		String profile = naverLoginController.getUserProfile(oauthToken);
 		//위 스트링형 profile 정보를 json데이터로 파싱합니다.(key:value 형태로 만듬)
-		//logger.info("디버그 119" + profile.toString());
-		//디버그 119{"resultcode":"00","message":"success","response":{"id":"jdLSxUOaBdyQ8RdCs802PMvwrkY5LJ9sV9e-4qMfVMc","email":"quk6757@naver.com","name":"\uc784\uc0db\ubcc4"}}
+		//logger.info("디버그119 " + profile.toString());
+		//디버그119 {"resultcode":"00","message":"success","response":{"id":"nlAl_ohdFzDJFZmpUaG4P_6L2_DkJHMsKTHDACo-nCw","email":"boramcom@daum.net","name":"\uae40\uc77c\uad6d"}}
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(profile);//Json데이터로 파싱
 		JSONObject jsonObj = (JSONObject) obj;//반환코드+메세지변수값+response값
 		JSONObject response_obj = (JSONObject) jsonObj.get("response");//프로파일
 		String status = (String) jsonObj.get("message");//인증성공여부확인 변수값
-		
 		//위 최종적으로 출력된 response_obj를 파싱시작(아래)
-		
 		String username = (String) response_obj.get("name");
 		String useremail = (String) response_obj.get("email");
 		
@@ -89,7 +86,7 @@ public class LoginController {
 			session.setAttribute("session_userid", useremail);
 			session.setAttribute("session_levels", "ROLE_USER");
 			session.setAttribute("session_username", username);
-			session.setAttribute("session_login_type", "sns");//마이페이지 안보이게처리용
+			session.setAttribute("session_login_type", "sns");//마이페이지 않보이게처리용
 			rdat.addFlashAttribute("msg", "네이버 아이디 로그인");//출력결과: 네이버 아이디 로그인 이(가) 성공 하였습니다. alert창으로 나옴
 		} else {
 			rdat.addFlashAttribute("msgError", "네이버 인증이 실패했습니다. 다시 로그인해 주세요!");
