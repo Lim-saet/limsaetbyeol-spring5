@@ -13,8 +13,7 @@ white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 </style>
 <script>
-
-// 메인페이지 전용 슬라이드 호출 부분//
+// 메인페이지 전용 슬라이드 호출 부분: index에서만 필요한 코드이기 때문에
 $(document).ready(function() {
 	// 위에서 선언한 함수|변수 사용(아래)
 	//여기서 함수호출(실행)
@@ -35,7 +34,6 @@ $(document).ready(function() {
 		$(this).parent().hide();// a태그의 부모 rollplay영역 입니다.
 		$('.rollstop').css('display','inline-block');
 		play_w('right');//3초마다 슬라이드 이미지 액션일 발생합니다.
-
 	});
 	$('.rollingbtn li.seq a').each(function(index){
 		$(this).click(function(){
@@ -48,7 +46,7 @@ $(document).ready(function() {
 		});
 	});
 });
-</script>	
+</script>
 	<!-- 메인콘텐츠영역 -->
 	<div id="container">
 		<!-- 모바일+PC 공통슬라이드영역 -->
@@ -97,16 +95,16 @@ $(document).ready(function() {
 	
 		<!-- 갤러리최근게시물영역 -->
 		<div class="about_area">
-			<h2><a href="/home/board/board_list?board_type=gallery&search_keyword=">갤러리 최근 게시물 <b>TOP 3</b>
+			<h2><a href="/home/board/board_list?board_type=gallery&search_keyword=">
+			겔러리 최근 게시물 <b>TOP 3</b>
 			</a></h2>
 			<div class="about_box">
 				<ul class="place_list box_inner clear">
 				<c:forEach var="galleryVO" items="${latestGallery}">
-				<!-- 게시판종류 board_type값은 세션이지만 여기서 최초로 세션을 발생시켜야 합니다 -->
-				<li>
-				<a href="/home/board/board_view?bno=${galleryVO.bno}&page=1&board_type=gallery">
-				<div class="latest_img">
-							<c:choose>
+					<!-- 게시판종류 board_type값은 세션이지만, 여기서 최초로 세션을 발생시켜야 합니다. -->
+					<li><a href="/home/board/board_view?bno=${galleryVO.bno}&page=1&board_type=gallery">
+						<div class="latest_img">
+						<c:choose>
 							<c:when test="${empty galleryVO.save_file_names[0]}">
 								<img class="img_topplace" src="/resources/home/img/no_image.png" alt="OOOO OOOOO"/>
 							</c:when>
@@ -114,30 +112,28 @@ $(document).ready(function() {
 								<img class="img_topplace" src="/image_preview?save_file_name=${galleryVO.save_file_names[0]}" alt="OOOO OOOOO"/>
 							</c:otherwise>
 						</c:choose>
-							</div>
+						</div>						
 							<h3 class="title_crop">
 							<!-- css로 1줄 글자수 자르기 처리 -->
 								${galleryVO.title}
 							</h3>
 							
 							<p class="txt">
-							<!-- jstl로 글자수 자르기 처리  -->
+							<!-- jstl로 글자수 자르기 처리 -->
 							<c:choose>
-								<c:when test="${fn:length(galleryVO.title) gt 22}">
-									${fn:substring(galleryVO.title,0,50}...
+								<c:when test="${fn:length(galleryVO.content) gt 52}">
+									${fn:substring(galleryVO.content,0,50)}...
 								</c:when>
 								<c:otherwise>
-								${galleryVO.content}
+									${galleryVO.content}
 								</c:otherwise>
 							</c:choose>
-							
-							
-							
 							</p>
 							<span class="view">VIEW</span>
-							</a>
+						</a>
 					</li>
-				</c:forEach>
+				</c:forEach>					
+					
 				</ul>
 			</div>
 		</div>
@@ -152,12 +148,17 @@ $(document).ready(function() {
 					<a href="javascript:;">전화 상담 신청</a>
 				</p>
 				<div class="bbs_line">
-					<h3><a href="/home/board/board_list?board_type=notice&search_keyword=">NOTICE</a></h3>
+					<h3><a href="/home/board/board_list?board_type=notice&search_keyword=">
+					NOTICE
+					</a></h3>
 					<ul class="notice_recent">
 					<c:forEach var="noticeVO" items="${latestNotice}">
-					<li><a href="/home/board/board_view?bno=${noticeVO.bno}&page=1&board_type=notice">${noticeVO.title}</a></li>
-					</c:forEach>
-						
+						<li>
+						<a href="/home/board/board_view?bno=${noticeVO.bno}&page=1&board_type=notice">
+						${noticeVO.title}
+						</a>
+						</li>
+					</c:forEach>				
 						
 					</ul>
 				</div>
