@@ -46,8 +46,9 @@
           <div class="card-body p-0">
             <ul class="users-list clearfix">
             <c:forEach var="memberVO" items="${latestMembers}">
-            <li style="cursor: pointer;" onclick="location.replace('/admin/member/member_view?user_id=${memberVO.user_id}')">
-                <img src="/resources/admin/dist/img/default-150x150.png" alt="User Image">
+            <li style="cursor: pointer;" onclick="location.replace('/admin/member/member_view?user_id=${memberVO.user_id}&page=1')">
+                <!-- <img src="" alt="User Image"> 아래 onerror은 엑박일때 대신 보여줄 이미지를 지정-->
+                <img style="width:120px;height:120px;'" onerror="this.src='/resources/admin/dist/img/default-150x150.png'" src="/resources/profile/${memberVO.user_id}.jpg">
                 <a class="users-list-name" href="#">${memberVO.user_name}</a>
                 <span class="users-list-date">2021-05-28</span>
                 <fmt:formatDate pattern="yyyy-MM-dd hh:MM:ss" value="${memberVO.reg_date}"/>
