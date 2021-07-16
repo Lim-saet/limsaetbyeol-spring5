@@ -5,6 +5,25 @@
 3. 문서작업(화면기획서XLS 제작, 화면설계서PPT 제작)
 - 헤로쿠 클라우드에 배포할때 매퍼폴더의 mysql폴더내의 쿼리에 now()를 date_add(now(3),interval 9 HOUR)변경예정
 
+#### 0716금 작업
+- 수업전 헤로쿠 배포 후 어제 작업한 결과 확인
+- jsp 템플릿인 tiles(타일즈) 사용
+- jsp 템플릿 tiles, siteMesh(사이트매쉬), velocity(벨로시티) 등이 있음
+- 현업에서는 위 3가지 템플릿 중 1가지는 항상 사용해서 대표적으로 타일즈를 실습할 예정
+- 위 3가지 구조는 비슷하기 때문에 1가지만 아셔도 다른 jsp 템플릿 적용시 응용가능
+- 타일즈역할: jsp템플릿이라하고 jsp구조(레이아웃)을 체계적으로 관리하는 모듈
+- include(header.jsp,footer.jsp)를 대체
+작업순서:
+- 1. pom.xml 타일즈 모듈 라이브러리 추가
+- 2. tiles-context.xml 타일즈설정파일 추가
+- 3. 위 설정파일을 기준으로 titles폴더 및 layouts폴더 생성 후 layout.jsp생성
+- 4. 기존 home/include 폴더의 header.jsp 와 footer.jsp 파일 복사해서 그대로 사용
+- 5. 기존 home/index.jsp 파일 그대로 복사해서 tiles/index.jsp로 복사해서 @include 삭제만 처리
+- 6. servlet-context.xml 에서 타일즈용 뷰리졸버 빈 추가
+- 7. HomeController 에서 기존 @RequestMapping 복사해서 타일즈용으로 추가
+- -------------------------------------------------------
+- 알고리즘 다이어그램기반으로 자바코딩테스트예정(깃 it강의저장소자료이용).
+
 #### 앞으로 남은 1주일간 작업예정내용 정리.
 - 사용자단 메인페이지(대시보드) 작업예정.
 - 문서작업(제출용)예정.
